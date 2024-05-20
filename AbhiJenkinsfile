@@ -9,7 +9,7 @@ pipeline {
     stage('CheckOut') {
       steps {
         echo 'Checkout the source code from GitHub'
-        git branch: 'main', url: 'https://github.com/devopscbabu/InsureProject-Dec3Batch.git'
+        git branch: 'master', url: 'https://github.com/Abhipammu123/star-agile-insurance-project.git'
             }
     }
     
@@ -28,20 +28,20 @@ pipeline {
     
     stage('Docker Image Creation') {
       steps {
-        sh 'docker build -t cbabu85/insureprojectdec3:latest .'
+        sh 'docker build -t abhilashdr123/banking-finance:2.0 .'
             }
     }
     stage('DockerLogin') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'Docker-Hub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+        sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
 }
             }
     }
 
     stage('Push Image to DockerHub') {
       steps {
-        sh 'docker push cbabu85/insureprojectdec3:latest'
+        sh 'docker push abhilashdr123/banking-finance:2.0'
             }
     }
     stage('Deploy Application using Ansible') {
