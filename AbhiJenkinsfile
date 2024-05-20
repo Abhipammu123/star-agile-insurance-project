@@ -33,15 +33,15 @@ pipeline {
     }
     stage('DockerLogin') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'Docker-Hub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+        withCredentials([usernamePassword(credentialsId: 'Dockerlogincred', passwordVariable: 'Dockerpassword', usernameVariable: 'Dockerlogin')]) {
+        sh "docker login -u ${Dockerlogin} -p ${Dockerpassword}"
 }
             }
     }
 
     stage('Push Image to DockerHub') {
       steps {
-        sh 'docker push abhilashdr123/insurance-project'
+        sh 'docker push abhilashdr123/insurance-project:1.0'
             }
     }
     stage('Deploy Application using Ansible') {
